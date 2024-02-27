@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html layout:decorate="~{task/layout}">
+  <head>
+    <title>Task List</title>
+   
+  </head>
+  <body>
+
+    <div th:replace="fragments/header :: header"></div>
+
+    <div>
+        <label>Description</label>
+        <input type="text" th:field="*{textField}" placeholder="Description" />
+    </div>
+    <br/>
+    <div>
+        <label>DuoDate</label>
+        <input type="text" th:field="*{textField}" placeholder="DuoDate" />
+    </div>
+    <br/>
+    <button>Salvar</button>
+
+    <!-- /* Content of this page will be decorated by the elements of layout.html (task/layout) */ -->
+    <div layout:fragment="content">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <td>ID</td>
+            <td>Description</td>
+            <td>DuoDate</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="task : ${tasks}">
+            <td th:text="${task.id}"></td>
+            <td th:text="${task.text}"></td>
+            <td th:text="${#calendars.format(task.dueTo)}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
